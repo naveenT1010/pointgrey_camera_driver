@@ -1,13 +1,25 @@
 <launch>
   <!-- Common parameters -->
   <arg name="camera_name" default="camera" />
-  <arg name="frame_rate" default="15" />
+  <arg name="frame_rate" default="7" />
 
   <arg name="left_camera_serial" default="0" />
   <arg name="left_camera_calibrated" default="0" />
 
   <arg name="right_camera_serial" default="0" />
   <arg name="right_camera_calibrated" default="0" />
+
+  <!-- Custom Arguments for Better NETWORK Stability 
+  <arg name="auto_packet_size" default="false" />
+  <arg name="packet_size" default="9000" /> -->
+  <arg name="packet_delay" default="5000" />
+
+  <!-- Custom Arguments for ROI Extraction -->
+  <arg name="roi_width" default="0" />
+  <arg name="roi_height" default="0" />
+  <arg name="x_offset" default="0" />
+  <arg name="y_offset" default="0" />
+
 
   <group ns="$(arg camera_name)" >
     <group ns="left" >
@@ -18,6 +30,17 @@
             args="load pointgrey_camera_driver/PointGreyCameraNodelet camera_nodelet_manager" >
         <param name="frame_id" value="camera_left" />
         <param name="serial" value="$(arg left_camera_serial)" />
+
+        <!-- Custom Parameters for Better NETWORK Stability 
+        <param name="auto_packet_size" value="$(arg auto_packet_size)" />
+        <param name="packet_size" value="$(arg packet_size)" /> -->
+        <param name="packet_delay" value="$(arg packet_delay)" />
+
+        <!-- Custom Parameters for ROI Extraction -->
+        <param name="format7_roi_width" value="$(arg roi_width)" />
+        <param name="format7_roi_height" value="$(arg roi_height)" />
+        <param name="format7_x_offset" value="$(arg x_offset)" />
+        <param name="format7_y_offset" value="$(arg y_offset)" />
 
         <!-- When unspecified, the driver will use the default framerate as given by the
              camera itself. Use this parameter to override that value for cameras capable of
@@ -42,6 +65,17 @@
         <param name="frame_id" value="camera_right" />
         <param name="serial" value="$(arg right_camera_serial)" />
 
+        <!-- Custom Parameters for Better NETWORK Stability 
+        <param name="auto_packet_size" value="$(arg auto_packet_size)" />
+        <param name="packet_size" value="$(arg packet_size)" /> -->
+        <param name="packet_delay" value="$(arg packet_delay)" />
+
+        <!-- Custom Parameters for ROI Extraction -->
+        <param name="format7_roi_width" value="$(arg roi_width)" />
+        <param name="format7_roi_height" value="$(arg roi_height)" />
+        <param name="format7_x_offset" value="$(arg x_offset)" />
+        <param name="format7_y_offset" value="$(arg y_offset)" />
+
         <!-- When unspecified, the driver will use the default framerate as given by the
              camera itself. Use this parameter to override that value for cameras capable of
              other framerates. -->
@@ -57,7 +91,7 @@
       </node>
 
     </group>
-
+    
     <node pkg="stereo_image_proc" type="stereo_image_proc" name="stereo_image_proc">
       <param name="approximate_sync" value="true"/>
     </node>

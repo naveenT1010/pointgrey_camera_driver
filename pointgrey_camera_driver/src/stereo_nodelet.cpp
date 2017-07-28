@@ -114,7 +114,7 @@ private:
         roi_y_offset_ = config.format7_y_offset;
         roi_width_ = config.format7_roi_width;
         roi_height_ = config.format7_roi_height;
-        do_rectify_ = true; // Set to true if an ROI is used.
+        do_rectify_ = true; // Set to true if an ROI is used. MADE CHANGE HERE
       }
       else
       {
@@ -282,6 +282,7 @@ private:
         rci_->binning_x = binning_x_;
         ci_->binning_y = binning_y_;
         rci_->binning_y = binning_y_;
+
         ci_->roi.x_offset = roi_x_offset_;
         rci_->roi.x_offset = roi_x_offset_;
         ci_->roi.y_offset = roi_y_offset_;
@@ -292,6 +293,16 @@ private:
         rci_->roi.width = roi_width_;
         ci_->roi.do_rectify = do_rectify_;
         rci_->roi.do_rectify = do_rectify_;
+
+        // Made changes here
+        //ci_->roi.x_offset = 0;
+        //rci_->roi.x_offset = 0;
+        //ci_->roi.y_offset = 0;
+        //rci_->roi.y_offset = 0;
+        //ci_->roi.height = 0;
+        //rci_->roi.height = 0;
+        //ci_->roi.width = 0;
+        //rci_->roi.width = 0;
 
         it_pub_.publish(image, ci_);
         rit_pub_.publish(second_image, rci_);

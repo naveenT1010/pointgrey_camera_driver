@@ -501,11 +501,17 @@ private:
             // The height, width, distortion model, and parameters are all filled in by camera info manager.
             ci_->binning_x = binning_x_;
             ci_->binning_y = binning_y_;
+
             ci_->roi.x_offset = roi_x_offset_;
             ci_->roi.y_offset = roi_y_offset_;
             ci_->roi.height = roi_height_;
             ci_->roi.width = roi_width_;
             ci_->roi.do_rectify = do_rectify_;
+
+            // ci_->roi.x_offset = 0;
+            // ci_->roi.y_offset = 0;
+            // ci_->roi.height = 720;
+            // ci_->roi.width = 1280;
 
             wfov_image->info = *ci_;
 
